@@ -1,0 +1,43 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node ./dist.index.js",
+    "dev": "tsnd index.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "cors": "2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.25.3",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.7",
+    "@types/sequelize": "^4.28.14",
+    "@types/chai": "4.3.0",
+    "@types/cors": "2.8.12",
+    "@types/jsonwebtoken": "8.5.6",
+    "@types/mocha": "9.1.0",
+    "@types/sinon": "10.0.11",
+    "chai": "4.3.6",
+    "chai-http": "4.3.0",
+    "eslint": "^8.26.0",
+    "mocha": "^9.2.2",
+    "nodemon": "^2.0.20",
+    "sequelize-cli": "^6.5.2",
+    "sinon": "13.0.1",
+    "ts-node-dev": "^2.0.0"
+  }
+}
