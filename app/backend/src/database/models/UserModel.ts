@@ -30,7 +30,7 @@ User.init({
     allowNull: false,
   },
   password: {
-    type: INTEGER,
+    type: STRING,
     allowNull: false,
   },
 
