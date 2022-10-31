@@ -4,7 +4,7 @@
   "description": "",
   "main": "./build/server",
   "scripts": {
-    "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create",
+    "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "npm run build && node ./build/server.js",
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
     "build": "tsc",
