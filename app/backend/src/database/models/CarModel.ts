@@ -42,7 +42,7 @@ CarModel.init({
 }, {
   underscored: true,
   sequelize: db,
-  modelName: 'users',
+  modelName: 'cars',
   timestamps: false,
 });
 

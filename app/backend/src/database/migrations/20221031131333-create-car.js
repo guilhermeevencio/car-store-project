@@ -18,9 +18,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      urlImage: {
+      imageUrl: {
         allowNull: false,
         type: Sequelize.STRING,
+        field: 'image_url'
       },
       price: {
         allowNull: false,
