@@ -1,4 +1,4 @@
-import { ICarResponse } from "../../interfaces/CarInterfaces";
+import { ICarResponse } from '../../interfaces/CarInterfaces';
 
 const carMock: ICarResponse = {
   id: 1,
@@ -9,6 +9,15 @@ const carMock: ICarResponse = {
   price: 100000,
 }
 
+const carRequestInfo = {
+  name: 'uno',
+  brand: 'fiat',
+  model: 'hatch',
+  imageUrl: 'image_url',
+  price: 100000,
+}
+
 export {
   carMock,
+  carRequestInfo,
 }

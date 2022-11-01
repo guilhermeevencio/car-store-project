@@ -1,18 +1,20 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
 import CarModel from '../database/models/CarModel';
+import * as jwt from 'jsonwebtoken';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { expect } from 'chai';
 import { Response } from 'express';
 
 import { app } from '../app';
-import { carMock } from './mocks/carMock';
+import { carMock, carRequestInfo } from './mocks/carMock';
+import { userMock } from './mocks/userMock';
+import UserModel from '../database/models/UserModel'
 
 chai.use(chaiHttp)
 
 describe('\"/car\" route', () => {
-  let chaiHttpResponse: Response;
 
   beforeEach(() => {
     sinon.stub(CarModel, 'findAll').resolves([carMock] as CarModel[])
@@ -39,7 +41,6 @@ describe('\"/car\" route', () => {
 });
 
 describe('\"cars/id\" route', () => {
-  let chaiHttpResponse: Response;
 
   beforeEach(() => {
     sinon.stub(CarModel, 'findOne').resolves(carMock as CarModel)
@@ -62,4 +63,28 @@ describe('\"cars/id\" route', () => {
 
     expect(response.body).to.deep.equal(carMock);
   })
+});
+
+describe('\"cars\" register route', () => {
+
+  beforeEach(async () => {
+    sinon.stub(CarModel, 'create').resolves(carMock as CarModel);
+    sinon.stub(jwt, "verify").callsFake(() => userMock as UserModel);
+  });
+
+  afterEach(()=>{
+    (CarModel.create as sinon.SinonStub).restore();
+    (jwt.verify as sinon.SinonStub).restore();
+  })
+
+  it('A requisição retorna status 201 e os dados do carro criado.', async () => {
+    const response = await chai.request(app)
+      .post('/cars')
+      .send(carRequestInfo)
+      .set('authorization', 'my_token');
+
+    expect(response.status).to.equal(201);
+    expect(response.body).to.be.deep.equal(carMock);
+  });
+
 });
