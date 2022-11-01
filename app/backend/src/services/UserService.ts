@@ -3,11 +3,12 @@ import UserModel from "../database/models/UserModel";
 import {
   IUserCredentials,
   IUserLoginResponse,
+  IUserService,
 } from "../interfaces/UserInterfaces";
 import TokenService from "../services/TokenService";
 import HandleWithPassword from "../services/PasswordService";
 
-export default class UserService {
+export default class UserService implements IUserService {
   private userCredentials: IUserCredentials;
 
   static async findByEmail(email: string): Promise<UserModel | null> {
