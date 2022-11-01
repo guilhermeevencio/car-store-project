@@ -60,6 +60,6 @@ describe('\"cars/id\" route', () => {
     const response = await chai.request(app)
       .get('/cars/1')
 
-    expect(response.body).to.equal(carMock);
+    expect(response.body).to.deep.equal(carMock);
   })
 });

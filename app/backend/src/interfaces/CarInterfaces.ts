@@ -9,6 +9,7 @@ interface ICarResponse {
 
 interface ICarService {
   getAllCars(): Promise<ICarResponse[]>
+  getCarById(id: number): Promise<ICarResponse>
 }
 
 export {
