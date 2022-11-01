@@ -3,6 +3,7 @@ import CustomError from '../Error/CustomError';
 import { ICarResponse, ICarService } from '../interfaces/CarInterfaces';
 
 export default class CarService implements ICarService {
+
   async getAllCars(): Promise<ICarResponse[]> {
     const cars = await CarModel.findAll()
 
@@ -13,5 +14,12 @@ export default class CarService implements ICarService {
     }) 
 
     return carDataInfo
+  }
+
+  async getCarById(paramId: number): Promise<ICarResponse> {
+    const car = await CarModel.findOne({ where: { id: paramId } });
+    const {id, name, brand, model, imageUrl, price} = car as CarModel
+
+    return {id, name, brand, model, imageUrl, price};
   }
 }
