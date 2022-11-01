@@ -1,14 +1,14 @@
 import * as jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import CustomError from '../Error/CustomError';
-import { LoginRequest } from '../interfaces/UserInterfaces';
+import { IUserCredentials } from '../interfaces/UserInterfaces';
 
 class TokenService {
-  static createToken(userInfo: LoginRequest): string {
+  static createToken(userCredentials: IUserCredentials): string {
     const secret = process.env.JWT_SECRET || 'jwt_secret';
-    const dataStoredInToken: LoginRequest = userInfo;
+    const { role, username, email }: IUserCredentials = userCredentials;
 
-    return jwt.sign(dataStoredInToken, secret);
+    return jwt.sign({ role, username, email }, secret);
   }
 
   static validateToken(token: string): jwt.JwtPayload {
