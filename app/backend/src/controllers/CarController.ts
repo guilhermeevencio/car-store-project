@@ -7,9 +7,21 @@ export default class CarController {
 
   public async getAllCars(_req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const carsResponse = await this.carService.getAllCars()
+      const carsResponse = await this.carService.getAllCars();
 
-      res.status(200).json(carsResponse)
+      res.status(200).json(carsResponse);
+      
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async getCarById(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const paramsId: number = Number(req.params);
+      const carResponse = await this.carService.getCarById(paramsId);
+
+      res.status(200).json(carResponse);
       
     } catch (error) {
       next(error);
