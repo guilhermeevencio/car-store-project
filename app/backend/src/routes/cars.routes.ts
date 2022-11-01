@@ -10,7 +10,11 @@ const carController = new CarController(carService)
 const CarsRoutes = Router()
 
 CarsRoutes.get('/cars', (req, res, next) => {
-  carController.getAllCars(req, res, next)
+  carController.getAllCars(req, res, next);
+});
+
+CarsRoutes.get('/cars/:id', (req, res, next) => {
+  carController.getCarById(req, res, next);
 });
 
 export default CarsRoutes
