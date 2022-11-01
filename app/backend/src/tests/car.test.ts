@@ -37,3 +37,29 @@ describe('\"/car\" route', () => {
     expect(response.body[0]).to.deep.equal(carMock);
   });
 });
+
+describe('\"cars/id\" route', () => {
+  let chaiHttpResponse: Response;
+
+  beforeEach(() => {
+    sinon.stub(CarModel, 'findOne').resolves(carMock as CarModel)
+  });
+
+  afterEach(()=>{
+    (CarModel.findOne as sinon.SinonStub).restore();
+  })
+
+  it('retorna status 200', async  () => {
+    const response = await chai.request(app)
+      .get('/cars/1')
+
+    expect(response.status).to.equal(200);
+  })
+
+  it('retorna o carro selecionado', async  () => {
+    const response = await chai.request(app)
+      .get('/cars/1')
+
+    expect(response.body).to.equal(carMock);
+  })
+});
