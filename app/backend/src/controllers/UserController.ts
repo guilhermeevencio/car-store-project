@@ -3,7 +3,7 @@ import CustomError from '../Error/CustomError';
 import { IUserService } from '../interfaces/UserInterfaces';
 
 export default class UserLoginController {
-  constructor(private userService : IUserService) {}
+  constructor(private userService : IUserService) {};
 
   public async loginUser(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
