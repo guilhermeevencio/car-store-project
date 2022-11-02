@@ -22,4 +22,15 @@ export default class CarService implements ICarService {
 
     return {id, name, brand, model, imageUrl, price};
   }
+
+  async updateCar(carRequestInfo: ICarResponse): Promise<void> {
+    await this.carModel.update({...carRequestInfo}, { where: { id: carRequestInfo.id } });
+  }
+
+  async deleteCar(id: number): Promise<void> {
+    const car = await this.carModel.findOne({ where: { id } });
+    if (!car) throw new CustomError('Car does not exist', 404);
+    await this.carModel.destroy({ where: { id } });
+  }
+  
 }
