@@ -5,12 +5,12 @@ import * as jwt from 'jsonwebtoken';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { expect } from 'chai';
-import { Response } from 'express';
 
 import { app } from '../app';
-import { carMock, carRequestInfo } from './mocks/carMock';
+import { carMock, carRequestInfo, carUpdateResponse } from './mocks/carMock';
 import { userMock } from './mocks/userMock';
 import UserModel from '../database/models/UserModel'
+import CustomError from '../Error/CustomError';
 
 chai.use(chaiHttp)
 
@@ -65,7 +65,7 @@ describe('\"cars/id\" route', () => {
   })
 });
 
-describe('\"cars\" register route', () => {
+describe('\"cars\" register route with correct token', () => {
 
   beforeEach(async () => {
     sinon.stub(CarModel, 'create').resolves(carMock as CarModel);
@@ -87,4 +87,74 @@ describe('\"cars\" register route', () => {
     expect(response.body).to.be.deep.equal(carMock);
   });
 
+});
+
+describe('\"cars\" register route with wrong token', () => {
+
+  beforeEach(async () => {
+    sinon.stub(CarModel, 'create').resolves(carMock as CarModel);
+    sinon.stub(jwt, "verify").callsFake(() => new CustomError('Token must be a valid token', 401));
+  });
+
+  afterEach(()=>{
+    (CarModel.create as sinon.SinonStub).restore();
+    (jwt.verify as sinon.SinonStub).restore();
+  })
+
+  it('Verifica que não é possível registrar um carro sem token válido.', async () => {
+    const response = await chai.request(app)
+      .post('/cars')
+      .send(carRequestInfo)
+      .set('authorization', 'my_wrong_token');
+
+    expect(response.status).to.equal(401);
+    expect(response.body.message).to.be.equal('Token must be a valid token');
+  });
+});
+
+describe('\"cars\" update route with correct token', () => {
+
+  beforeEach(async () => {
+    sinon.stub(CarModel, 'update');
+    sinon.stub(jwt, "verify").callsFake(() => userMock as UserModel);
+  });
+
+  afterEach(()=>{
+    (CarModel.update as sinon.SinonStub).restore();
+    (jwt.verify as sinon.SinonStub).restore();
+  })
+
+  it('A requisição retorna status 201 e a mensagem de sucesso.', async () => {
+    const response = await chai.request(app)
+      .put('/cars')
+      .send(carRequestInfo)
+      .set('authorization', 'my_token');
+
+    expect(response.status).to.equal(200);
+    expect(response.body).to.be.deep.equal({ message: 'Successfully updated!' });
+  });
+
+});
+
+describe('\"cars\" update route with wrong token', () => {
+
+  beforeEach(async () => {
+    sinon.stub(CarModel, 'update')
+    sinon.stub(jwt, "verify").callsFake(() => new CustomError('Token must be a valid token', 401));
+  });
+
+  afterEach(()=>{
+    (CarModel.update as sinon.SinonStub).restore();
+    (jwt.verify as sinon.SinonStub).restore();
+  })
+
+  it('Verifica que não é possível atualizar um carro sem token válido.', async () => {
+    const response = await chai.request(app)
+      .put('/cars')
+      .send(carRequestInfo)
+      .set('authorization', 'my_wrong_token');
+
+    expect(response.status).to.equal(401);
+    expect(response.body.message).to.be.equal('Token must be a valid token');
+  });
 });
