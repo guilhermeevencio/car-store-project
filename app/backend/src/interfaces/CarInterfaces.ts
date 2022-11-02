@@ -14,6 +14,9 @@ interface ICarResponse extends ICarRequestInfo {
 interface ICarService {
   getAllCars(): Promise<ICarResponse[]>
   getCarById(id: number): Promise<ICarResponse>
+  registerCar(carRequestInfo: ICarRequestInfo): Promise<ICarResponse>
+  updateCar(carRequestInfo: ICarRequestInfo): Promise<void>
+  deleteCar(id: number): Promise<void>
 }
 
 export {
