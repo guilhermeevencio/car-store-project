@@ -1,3 +1,9 @@
+import { CardsSection } from '../../components/CardsSection'
+
 export function Home() {
-  return <h2>Home</h2>
+  return (
+    <div className="flex justify-center mx-auto bg-slate-200">
+      <CardsSection />
+    </div>
+  )
 }
