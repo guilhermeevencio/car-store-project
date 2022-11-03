@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import AppContext, { IAppContext } from '../../context/AppContext'
 
 export function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { setUserInfo } = useContext(AppContext) as IAppContext
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.name) {
