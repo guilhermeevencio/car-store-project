@@ -1,14 +1,33 @@
-import { ICarResponse } from "../../interfaces/CarInterfaces";
+import { ICarRequestInfo, ICarResponse } from '../../interfaces/CarInterfaces';
 
-const carMock: ICarResponse = {
+const carMock: ICarResponse  = {
   id: 1,
   name: 'uno',
-  model: "hatch",
-  brand: "fiat",
-  imageUrl: "image_url",
+  brand: 'fiat',
+  model: 'hatch',
+  imageUrl: 'image_url',
   price: 100000,
+}
+
+const carRequestInfo: ICarRequestInfo = {
+  name: 'uno',
+  brand: 'fiat',
+  model: 'hatch',
+  imageUrl: 'image_url',
+  price: 100000,
+}
+
+const carUpdateResponse: ICarRequestInfo  & { id:number } = {
+  id: 1,
+  name: 'uno',
+  brand: 'fiat',
+  model: 'hatch',
+  imageUrl: 'image_url',
+  price: 100000,  
 }
 
 export {
   carMock,
+  carRequestInfo,
+  carUpdateResponse,
 }
