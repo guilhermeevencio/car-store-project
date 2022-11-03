@@ -124,7 +124,7 @@ describe('\"cars\" update route with correct token', () => {
     (jwt.verify as sinon.SinonStub).restore();
   })
 
-  it('A requisição retorna status 201 e a mensagem de sucesso.', async () => {
+  it('A requisição retorna status 200 e a mensagem de sucesso.', async () => {
     const response = await chai.request(app)
       .put('/cars')
       .send(carRequestInfo)
@@ -157,4 +157,79 @@ describe('\"cars\" update route with wrong token', () => {
     expect(response.status).to.equal(401);
     expect(response.body.message).to.be.equal('Token must be a valid token');
   });
+});
+
+describe('\"cars\" delete route with correct token', () => {
+
+  beforeEach(async () => {
+    sinon.stub(CarModel, 'destroy');
+    sinon.stub(CarModel, 'findOne').resolves(carMock as CarModel);
+    sinon.stub(jwt, "verify").callsFake(() => userMock as UserModel);
+  });
+
+  afterEach(()=>{
+    (CarModel.destroy as sinon.SinonStub).restore();
+    (CarModel.findOne as sinon.SinonStub).restore();
+    (jwt.verify as sinon.SinonStub).restore();
+  })
+
+  it('A requisição retorna status 200 e a mensagem de sucesso.', async () => {
+    const response = await chai.request(app)
+      .delete('/cars')
+      .send({ id: 1 })
+      .set('authorization', 'my_token');
+
+    expect(response.status).to.equal(200);
+    expect(response.body).to.be.deep.equal({ message: 'Successfully removed!' });
+  });
+
+});
+
+describe('\"cars\" delete route with wrong token', () => {
+
+  beforeEach(async () => {
+    sinon.stub(CarModel, 'destroy')
+    sinon.stub(jwt, "verify").callsFake(() => new CustomError('Token must be a valid token', 401));
+  });
+
+  afterEach(()=>{
+    (CarModel.destroy as sinon.SinonStub).restore();
+    (jwt.verify as sinon.SinonStub).restore();
+  })
+
+  it('Verifica que não é possível remover um carro sem token válido.', async () => {
+    const response = await chai.request(app)
+      .delete('/cars')
+      .send({ id: 1 })
+      .set('authorization', 'my_wrong_token');
+    
+    expect(response.status).to.equal(401);
+    expect(response.body.message).to.be.equal('Token must be a valid token');
+  });
+});
+
+describe('\"cars\" delete route with wrong id', () => {
+
+  beforeEach(async () => {
+    sinon.stub(CarModel, 'destroy');
+    sinon.stub(CarModel, 'findOne').resolves(null);
+    sinon.stub(jwt, "verify").callsFake(() => userMock as UserModel);
+  });
+
+  afterEach(()=>{
+    (CarModel.destroy as sinon.SinonStub).restore();
+    (CarModel.findOne as sinon.SinonStub).restore();
+    (jwt.verify as sinon.SinonStub).restore();
+  })
+
+  it('A requisição retorna status 404 e a mensagem de erro correspondente.', async () => {
+    const response = await chai.request(app)
+      .delete('/cars')
+      .send({ id: 50 })
+      .set('authorization', 'my_token');
+
+    expect(response.status).to.equal(404);
+    expect(response.body).to.be.deep.equal({ message: 'Car does not exist' });
+  });
+
 });
