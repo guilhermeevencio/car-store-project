@@ -3,6 +3,7 @@ import DefaultLayout from './layouts/DefaultLayout'
 import { Admin } from './pages/Admin'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
+import { PageNotImplemented } from './pages/PageNotImplemented'
 
 export function Router() {
   return (
@@ -12,6 +13,7 @@ export function Router() {
       </Route>
       <Route path="/admin" element={<Admin />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/cars/:id" element={<PageNotImplemented />} />
     </Routes>
   )
 }
