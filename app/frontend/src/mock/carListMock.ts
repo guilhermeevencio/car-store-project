@@ -1,4 +1,4 @@
-import ferrari458 from '../assets/ferrari-458-italia.png'
+import ferrari458 from '../assets/ferrari-458-italia.jpg'
 
 export const carListMock = [
   {
@@ -10,7 +10,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 2,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -18,7 +18,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 3,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -26,7 +26,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 4,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -34,7 +34,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 5,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -42,7 +42,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 6,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -50,7 +50,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 7,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -58,7 +58,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 8,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -66,7 +66,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 9,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -74,7 +74,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 10,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -82,7 +82,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 11,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -90,7 +90,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 12,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -98,7 +98,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 13,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
@@ -106,7 +106,7 @@ export const carListMock = [
     price: 3599000,
   },
   {
-    id: 1,
+    id: 14,
     name: '458 Italia',
     brand: 'Ferrari',
     model: 'Cupê',
