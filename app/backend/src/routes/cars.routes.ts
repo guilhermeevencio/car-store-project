@@ -26,4 +26,8 @@ CarsRoutes.put('/cars', ValidateToken, (req, res, next) => {
   carController.updateCar(req, res, next);
 });
 
+CarsRoutes.delete('/cars', ValidateToken, (req, res, next) => {
+  carController.deleteCar(req, res, next);
+});
+
 export default CarsRoutes
