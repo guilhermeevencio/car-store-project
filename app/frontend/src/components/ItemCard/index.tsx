@@ -12,12 +12,14 @@ export function ItemCards(props: ItemCardProps) {
     navigate(`/cars/${props.car.id}`)
   }
   return (
-    <div className="m-4 w-72 shadow-lg shadow-slate-300 rounded-lg">
-      <img
-        src={props.car.imageUrl}
-        alt={props.car.name}
-        className="rounded-t-lg hover:w-80"
-      />
+    <div className="m-4 w-72 h-96 shadow-lg shadow-slate-900 text-white rounded-lg bg-slate-700">
+      <div className="overflow-hidden h-64">
+        <img
+          src={props.car.imageUrl as string}
+          alt={props.car.name}
+          className="rounded-t-lg w-full h-50 object-cover"
+        />
+      </div>
       <h3 className="font-semibold text-lg py-4 text-center">{`${props.car.brand} ${props.car.name}`}</h3>
       <div className="flex flex-row justify-between items-center mx-4 pb-2">
         <p className="">
