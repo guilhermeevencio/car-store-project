@@ -6,7 +6,7 @@ import * as jwt from 'jsonwebtoken';
 import chaiHttp = require('chai-http');
 import { expect } from 'chai';
 
-import { app } from '../app';
+import app from '../app';
 import { carMock, carRequestInfo, carUpdateResponse } from './mocks/carMock';
 import { userMock } from './mocks/userMock';
 import UserModel from '../database/models/UserModel'

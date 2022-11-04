@@ -6,7 +6,7 @@ import * as jwt from 'jsonwebtoken';
 import chaiHttp = require('chai-http');
 import { expect } from 'chai';
 
-import { app } from '../app';
+import app from '../app';
 
 chai.use(chaiHttp)
 
