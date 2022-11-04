@@ -20,7 +20,7 @@ module.exports = {
       },
       imageUrl: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT('long'),
         field: 'image_url'
       },
       price: {
