@@ -6,7 +6,11 @@ export default class CarService implements ICarService {
   constructor(private carModel = CarModel) {};
 
   async getAllCars(): Promise<ICarResponse[]> {
-    const cars = await this.carModel.findAll()
+    const cars = await this.carModel.findAll({
+      order: [
+        ['price', 'DESC'],
+      ],
+    });
 
     const carDataInfo: ICarResponse[] =  cars.map((car) => {
       const {id, name, brand, model, imageUrl, price} = car
