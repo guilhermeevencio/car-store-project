@@ -21,9 +21,9 @@ export default class UserLoginController {
 
   public async validateUser(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { tokenEmail } = req.body;
+      const { token } = req.body;      
 
-      const { role } = await this.userService.validate(tokenEmail);
+      const { role } = await this.userService.validate(token);
 
       res.status(200).json({ role });
     } catch (error) {
