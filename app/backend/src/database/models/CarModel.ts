@@ -1,4 +1,4 @@
-import { Model, INTEGER, STRING } from 'sequelize';
+import { Model, INTEGER, STRING, TEXT } from 'sequelize';
 import db from '.';
 
 class CarModel extends Model {
@@ -31,7 +31,7 @@ CarModel.init({
     allowNull: false,
   },
   imageUrl: {
-    type: STRING,
+    type: TEXT('long'),
     allowNull: false,
   },
   price: {
