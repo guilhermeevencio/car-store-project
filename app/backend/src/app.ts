@@ -1,38 +1,16 @@
 import * as express from 'express';
 import router from './routes';
 import ErrorHandler from './middlewares/ErrorHandler';
+import * as cors from 'cors'
+import bodyParser = require('body-parser');
 
-class App {
-  public app: express.Express;
+const app = express();
 
-  constructor() {
-    this.app = express();
+app.use(cors());
+app.use(express.json({limit: '25mb'}));
+app.use(express.urlencoded({limit: '25mb', extended: true}));
 
-    this.config();
+app.use(router);
+app.use(ErrorHandler);
 
-    this.app.get('/', (req, res) => res.json({ ok: true }));
-  }
-
-  private config():void {
-    const accessControl: express.RequestHandler = (_req, res, next) => {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
-      res.header('Access-Control-Allow-Headers', '*');
-      next();
-    };
-
-    this.app.use(express.json());
-    this.app.use(accessControl);
-    this.app.use(router);
-    this.app.use(ErrorHandler);
-  }
-
-  public start(PORT: string | number):void {
-    this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
-  }
-}
-
-export { App };
-
-
-export const { app } = new App();
+export default app
