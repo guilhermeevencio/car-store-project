@@ -12,4 +12,8 @@ LoginRoutes.post('/login', (req, res, next) => {
   userController.loginUser(req, res, next);
 });
 
+LoginRoutes.post('/validate', (req, res, next) => {
+  userController.validateUser(req, res, next);
+});
+
 export default LoginRoutes;
