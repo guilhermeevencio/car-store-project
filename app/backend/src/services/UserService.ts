@@ -49,8 +49,10 @@ export default class UserService implements IUserService {
     };
   }
 
-  async validate(tokenEmail: string): Promise<UserModel> {
-    const user = await UserService.findByEmail(tokenEmail);
+  async validate(token: string): Promise<UserModel> {
+    const tokenInfo = TokenService.validateToken(token);
+    
+    const user = await UserService.findByEmail(tokenInfo.email);
 
     if (!user) throw new CustomError("Invalid Token", 401);
 

@@ -8,7 +8,8 @@ class TokenService {
     const secret = process.env.JWT_SECRET || 'jwt_secret';
     const { role, username, email }: IUserCredentials = userCredentials;
 
-    return jwt.sign({ role, username, email }, secret);
+    const token = jwt.sign({ role, username, email }, secret);
+    return token;
   }
 
   static validateToken(token: string): jwt.JwtPayload {
@@ -16,7 +17,7 @@ class TokenService {
       const secret = process.env.JWT_SECRET || 'jwt_secret';
       const data = jwt.verify(token, secret) as jwt.JwtPayload;
       return data;
-    } catch (error) {
+    } catch (error) {      
       throw new CustomError('Token must be a valid token', 401);
     }
   }
