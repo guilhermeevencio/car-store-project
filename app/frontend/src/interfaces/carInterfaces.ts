@@ -3,6 +3,14 @@ export interface ICar {
   name: string
   brand: string
   model: string
-  imageUrl: any
+  imageUrl: string | ArrayBuffer | null | undefined
+  price: number
+}
+
+export interface ICarRequest {
+  name: string
+  brand: string
+  model: string
+  imageUrl: string | ArrayBuffer | null | undefined
   price: number
 }

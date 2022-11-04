@@ -4,3 +4,7 @@ export interface IUser {
   role: string
   token: string
 }
+
+export interface IUserInfoResponse extends IUser {
+  id: number
+}
